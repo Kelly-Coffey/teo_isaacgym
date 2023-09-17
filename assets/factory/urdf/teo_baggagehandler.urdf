@@ -1,0 +1,174 @@
+<robot name="baggagehandler">
+ <!-- * * * Link Definitions * * * -->
+    <link name="teo_link0">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.075" length="0.03"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.075" length="0.03"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="200.0"/>
+        </inertial>
+    </link>
+   <link name="teo_link1">
+     <visual>
+       <geometry>     
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_baselink_3ft_4insq v1.stl"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <material name="red">
+         <color rgba="1 0 0 1"/>
+       </material>
+     </visual>
+   </link>
+   <link name="teo_link2">
+     <inertial>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="10.06512991"/>
+       <inertia ixx="0.304105" ixy="0.0" ixz="0.0" iyy="0.303183" iyz="0" izz="0.003568"/>
+     </inertial>
+     <visual>
+     <!-- origin xyz="0 0 0" rpy="0 0 0"/-->
+       <geometry>
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_link_1ft_sq_4insq.stl"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <material name="black">
+         <color rgba="0 0 0 1"/>
+       </material>
+     </visual>
+     <collision>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_link_1ft_sq_4insq.stl"/>
+       </geometry>
+     </collision>
+   </link>
+   <link name="teo_link3">
+     <inertial>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="10.06512991"/>
+       <inertia ixx="0.304105" ixy="0.0" ixz="0.0" iyy="0.303183" iyz="0" izz="0.003568"/>
+     </inertial>
+     <visual>
+     <!-- origin xyz="0 0 0" rpy="0 0 0"/-->
+       <geometry>
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_link_1ft_sq_4insq.stl"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <material name="red">
+         <color rgba="1 0 0 0"/>
+       </material>
+     </visual>
+     <collision>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_link_1ft_sq_4insq.stl"/>
+       </geometry>
+     </collision>
+    </link>
+    <link name="teo_head">
+     <inertial>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="10.06512991"/>
+       <inertia ixx="0.304105" ixy="0.0" ixz="0.0" iyy="0.303183" iyz="0" izz="0.003568"/>
+     </inertial>
+     <visual>
+     <!-- origin xyz="0 0 0" rpy="0 0 0"/-->
+       <geometry>
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_gripper_head_urdf v2.stl"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <material name="red">
+         <color rgba="1 0 0 0"/>
+       </material>
+     </visual>
+     <collision>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+       <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_gripper_head_urdf v2.stl"/>
+       </geometry>
+     </collision>
+   </link>
+<!-- * * * Joint Definitions * * * -->
+<joint name="teo_joint0" type="revolute">
+    <axis xyz="0 0 1" />
+    <parent link="teo_link0" />
+    <child link ="teo_link1" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="9.8" lower="-2.8973" upper="2.8973" velocity="1.57"/>    
+</joint>
+<joint name="teo_joint1" type="revolute">
+    <parent link="teo_link1"/>
+    <child link="teo_link2"/>
+    <origin xyz="0.065 0 1.102" rpy="0 0 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="9.8" lower="-2.8973" upper="2.8973" velocity="1.57"/>
+</joint>
+<joint name="teo_joint2" type="revolute">
+    <parent link="teo_link2"/>
+    <child link="teo_link3"/>
+    <origin xyz="0 0 0.405" rpy="0 0 3.14"/>
+    <dynamics damping="10.0"/>
+    <limit effort="9.8" lower="-2.8973" upper="2.8973" velocity="1.57"/>
+</joint>
+<joint name="teo_joint3" type="revolute">
+    <parent link="teo_link3"/>
+    <child link="teo_head"/>
+    <origin xyz="0 0 0.405" rpy="0 0 3.14"/>
+    <dynamics damping="10.0"/>
+    <limit effort="9.8" lower="-2.8973" upper="2.8973" velocity="1.57"/>
+</joint>
+
+  <link name="teo_gripper_top">
+    <visual>
+      <geometry>
+        <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_gripper_top_urdf v2.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_gripper_top_urdf v2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="teo_gripper_bottom">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_gripper_bottom_urdf v2.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh scale=".0010 .0010 .0010" filename="../../urdf/teo_description/meshes/visual/teo_gripper_bottom_urdf v2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="teo_gripper_joint1" type="prismatic">
+    <parent link="teo_head"/>
+    <child link="teo_gripper_top"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="98" lower="0.0" upper="0.04" velocity="0.2"/>
+  </joint>
+  <joint name="teo_gripper_joint2" type="prismatic">
+    <parent link="teo_head"/>
+    <child link="teo_gripper_bottom"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="98" lower="0.0" upper="0.04" velocity="0.2"/>
+    <mimic joint="teo_gripper_joint1"/>
+  </joint>
+</robot>
